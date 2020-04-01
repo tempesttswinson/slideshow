@@ -18,20 +18,24 @@ var slideshow = {
 
 	currentPhotoIndex: 0,
 
+	playInterval: null,
+
 	nextPhoto: function(){
 		
+
 		if(this.currentPhotoIndex <  this.photoList.length -1){
 			this.currentPhotoIndex = this.currentPhotoIndex + 1;
-			return this.photoList[this.currentPhotoIndex];
+			console.log(this.photoList[this.currentPhotoIndex]);
 		}else{
-			return ("End of slideshow");
+			slideshow.pause();
+			console.log("End of slideshow");
 		}
 	} ,
 		 
 
 	prevPhoto: function(){
 
-		if((this.currentPhotoIndex <  this.photoList.length) && (this.currentPhotoIndex !=== 0)){
+		if(this.currentPhotoIndex <  this.photoList.length && this.currentPhotoIndex !== 0){
 			this.currentPhotoIndex = this.currentPhotoIndex - 1;
 			return (this.photoList[this.currentPhotoIndex]);
 		}else {
@@ -41,23 +45,38 @@ var slideshow = {
 
 	getCurrentPhoto: function(){
 		return this.photoList[this.currentPhotoIndex];
+	},
+
+	play: function (){
+		var that = this;
+		that.getCurrentPhoto();
+		console.log(that.getCurrentPhoto());
+		that.playInterval = setInterval(function(){
+			that.nextPhoto();
+		}, 2000)
+	},
+
+	pause: function(){
+		clearInterval(this.playInterval);
 	}
-	
 
  }
 
-console.log(slideshow.photoList);
-console.log(slideshow.currentPhotoIndex);
-console.log(slideshow.nextPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.getCurrentPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
+ slideshow.play();
+
+// console.log(slideshow.photoList);
+// console.log(slideshow.currentPhotoIndex);
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.getCurrentPhoto());
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.nextPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.prevPhoto());
+// console.log(slideshow.play());
